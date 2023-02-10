@@ -62,8 +62,23 @@
 │       ├── core        # 引擎核心逻辑代码
 │       ├── constant    # 类型、符号等常量定义
 │       ├── exception   # 异常
-│   ├── web            # web部分(还没做)
+│   ├── web             # web 部分
+│       ├── aop         # 切面, 日志记录、接口耗时
+│       ├── config      # MybatisPlus 自动填充配置
+│       ├── constant    # 响应码等常量定义
+│       ├── controller  # 请求处理
+│       ├── dao         # 数据持久化
+│       ├── dto         # 数据传输对象
+│       ├── handler     # 全局异常处理
+│       ├── pojo        # 与数据库表对应的对象
 ```
+
+## 项目启动
+
+- 使用 `sql/db.sql` 中的 sql 语句建表。
+- 修改 `src/main/resources/application.yml` 中的数据库配置。
+- 使用 `maven` 拉取依赖。
+- 启动 `src/main/java/edu/gdut/RuleEngineApplication` 。
 
 ## 项目功能
 
@@ -174,16 +189,18 @@ void testRunEngine() throws CompileException, RuleEvalException {
   {
       "code": 0,
       "message": "success",
-      "data": [
-          {
-              "id": 1,
-              "exp": "age >= 20 && userLevel >= 5"
-          },
-          {
-              "id": 2,
-              "exp": "a > 10 && b > 20"
-          }
-      ]
+      "data": {
+          "expList": [
+              {
+                  "id": 1,
+                  "exp": "age >= 20 && userLevel >= 5"
+              },
+              {
+                  "id": 2,
+                  "exp": "a > 10 && b > 20"
+              }
+          ]
+    }
   }
   ```
 
